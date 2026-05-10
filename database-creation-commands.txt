@@ -1,0 +1,23 @@
+CREATE DATABASE salon;
+
+\c salon
+
+CREATE TABLE customers(
+    customer_id SERIAL PRIMARY KEY NOT NULL,
+    name VARCHAR(30) NOT NULL,
+    phone VARCHAR(8) UNIQUE NOT NULL
+);
+
+CREATE TABLE services(
+    service_id SERIAL PRIMARY KEY NOT NULL,
+    name VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE appointments(
+    appointment_id SERIAL PRIMARY KEY NOT NULL,
+    customer_id INT REFERENCES customers(customer_id) NOT NULL,
+    service_id INT REFERENCES services(service_id) NOT NULL,
+    time VARCHAR(16) NOT NULL
+);
+
+INSERT INTO services(name) VALUES('Haircut'), ('Nails'), ('Eyebrows');
